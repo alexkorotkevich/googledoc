@@ -1,5 +1,5 @@
 const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+// const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   entry: {
@@ -10,22 +10,19 @@ module.exports = {
     path: path.resolve(__dirname, "./public"),
     filename: "[name].js",
   },
-  //   plugins: [
-  //     new HtmlWebpackPlugin({
-  //       template: path.join(__dirname, "src", "template.html"),
-  //       filename: "index.html",
-  //     }),
-  //   ],
+  module: {
+    rules: [{ test: /\.css$/, use: ["style-loader", "css-loader"] }],
+  },
   devServer: {
-    watchFiles: path.join(__dirname, ""),
+    // watchFiles: path.join(__dirname, ""),
     static: [
       {
         publicPath: "/",
-        directory: ["public", "pages"],
+        directory: path.join(__dirname, "pages/home"),
       },
       {
-        publicPath: "/docs/",
-        directory: ["public", "pages"],
+        publicPath: "/docs/*",
+        directory: path.join(__dirname, "pages/doc"),
       },
     ],
     proxy: {
@@ -33,6 +30,5 @@ module.exports = {
         target: "http://localhost:8800",
       },
     },
-    // open: ["index"],
   },
 };

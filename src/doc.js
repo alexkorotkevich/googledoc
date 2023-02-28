@@ -1,1 +1,2 @@
-import "/client/collab.js"
+import "/client/collab.js";
+import "/public/style.css";
